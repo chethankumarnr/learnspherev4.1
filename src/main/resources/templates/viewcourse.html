@@ -1,0 +1,127 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
+<title>View Courses || LearnSphere</title>
+</head>
+
+<body style="margin: 10px 3%">
+<h6 style="text-align:right">Sort By :- <select >
+<option >Sort By:</option>
+<option onclick="sorts()" value="1">Names</option>
+</select></h6> 
+
+	<table class="table table-striped text-center">
+		<thead>
+			<tr>
+				<th>COURSE ID</th>
+				<th>COURSE NAME</th>
+				<th>COURSE PRICE</th>
+				<th>UPDATE</th>
+				<th>DELETE</th>
+				<th>VIEW LESSONS</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="cr : ${course}">
+				<td th:text="${cr.id}"></td>
+				<td th:text="${cr.coursename}"></td>
+				<td th:text="${cr.price}"></td>
+				
+				<td>
+					<form action="update/changes/{id}" method="GET">
+						<input type="hidden" th:value="${cr.id}" name="id"> <input
+							type="submit" value="Update" class="btn btn-primary ">
+					</form>
+				</td>
+				<td>
+					<form  action="/deletecourse" method="post">
+						<input type="hidden" name="_method" value="DELETE"> <input
+							type="hidden" th:value="${cr.id}" name="id"> <input
+							type="submit" value="Delete" class="btn btn-danger">
+					</form>
+				</td>
+
+<td>
+					<form action="/viewlessons/{id}" method="GET">
+						<input type="hidden" th:value="${cr.id}" name="id"> <input
+							type="submit" value="View" class="btn btn-primary ">
+					</form>
+				</td>
+				
+				
+
+			</tr>
+
+			<tr id="addtable" style="display:none">
+
+				<form id="addform" action="/addcoursetodbviaview" method="POST">
+					<div style="margin-left: 15rem;">
+						<td></td>
+					<td><input type="text" name="coursename" placeholder="Enter Course Name"></td>
+					<td><input type="text" name="price" placeholder="Enter Price"></td>
+					<td><button  class="btn btn-primary ">&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;</button></td>
+</div>				
+				</form>
+				<td><button onclick="cl()" class="btn btn-danger">Cancel</button></td>
+			</tr>
+
+		</tbody>
+	</table>
+	<a href="/bk"><button class="btn btn-primary btn-lg">Back</button></a>
+	<button id="sw" onclick=display() class="btn btn-primary btn-lg">Add Course</button>
+	<script>
+function display()
+{
+	console.log(document.getElementById('sw').innerHTML)
+	if(document.getElementById('sw').innerHTML=="Add Course"){
+	document.getElementById('addtable').style.display="table-row";
+	document.getElementById('sw').innerHTML="Cancel"
+	document.getElementById('sw').style.backgroundColor="darkred"
+	}
+	else{
+		document.getElementById('addtable').style.display="none";
+		document.getElementById('sw').innerHTML="Add Course"
+		document.getElementById('sw').style.backgroundColor="rgb(8,67,123,255)"	
+	}
+	}
+	
+	function cl()
+	{
+		document.getElementById('addtable').style.display="none";
+		display()
+	}
+	
+	function sorts()
+	{
+		location.href="/students/sort"
+	}
+	
+</script>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>

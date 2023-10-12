@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+	<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+       <title>Document</title>
+
+</head>
+<body>
+    <header>
+       <div class="user">
+       <!-- <img src='photo.jpg' alt="Image Description"> -->
+       <h5 class="nm">CHETHAN KUMAR N R</h5>
+       <p class="jb">Java Full Stack Developer</p>
+       </div>
+       <nav class="nv">
+          <ul>
+             <li><a href="#Details">Details</a></li>
+             <li><a href="#CB">Career Objective </a></li>
+             <li><a href="#Education">Education</a></li>
+             <li><a href="#Technical Skills">Technical Skills</a></li>
+             <li><a href="#Project">Project</a></li>
+          </ul>
+       </nav>
+    </header>
+    <section class="Details" id="Details">
+        <h1 class="heading"><span>Details About Me</span></h1>
+       <div class="Row">
+        <div class="det">
+             <h3><span>Name: </span>Chethan Kumar N R</h3>
+             <h3><span>Age: </span>23</h3>
+             <h3><span>Gender: </span>Male</h3>
+             <h3><span>Email: </span>chethanchethancng@gmail.com</h3>
+             <h3><span>Phone Number: </span>9008412799</h3>    
+             <h3><span>Working As: </span>Software Developer </h3> 
+             <h3><span>Institute or Organization: </span>Center For Excellence In Postal Technology, Department of Posts</h3>  
+        	<h3><span>Place: </span>Bengaluru</h3>
+        </div>
+    </div>
+    
+    </section>
+
+    <section class="cb" id="CB">
+        <h1 class="heading"><span>Career Objective</span></h1>
+        <div class="Row">
+        <div class="det">
+           <br> 
+             <p id="cbcss">As a highly motivated and enthusiastic fresher with skills in Java Full Stack
+                 Development, my goal is to secure a position as a Full Stack Developer where
+                  I can contribute my skills to develop robust software and web applications. I am 
+                  seeking an opportunity to work in a dynamic and challenging environment
+                   where I can continue to learn and grow as a developer.</p>  
+                   <br>
+        </div>
+    </div>
+</section>
+
+<section class="Education" id="Education">
+    <h1 class="title"><span>Education</span></h1><br><br><br>
+    <table>
+        
+
+        <tr>
+            <th>Course</th>
+            <th>Name of the Institute</th>
+            <th>University/Board</th>
+            <th>Percentage/CGPA</th>
+        </tr>
+        <tr>
+            <td>BE(Mech)</td>
+            <td>Dr. Ambedkar Institute Of Technology, Bengaluru</td>
+            <td>Visvesvaraya Technological University</td>
+            <td>8.35</td>
+        </tr>
+        
+        <tr>
+            <td>PUC</td>
+            <td>Government PU College, Channagiri</td>
+            <td>Department of Pre-university Education</td>
+            <td>87.16</td>
+        </tr>
+        <tr>
+            <td>10th</td>
+            <td>Sri Basava International School, Channagiri</td>
+            <td>Central Board of Secondary Education</td>
+            <td>9.8</td>
+        </tr>
+       
+    </table>
+</section>
+<br><br><br><br><br><br>
+<section class="Technical Skills" id="Technical Skills">
+    <h1 class="head"><span>Technical Skills</span></h1>
+    <div>
+        <br>
+        <br>
+    <ul id="lis">
+        
+        <li>Java</li>
+        <li>GoLang</li>
+        <li>HTML,CSS,JavaScript</li>
+        <li>SQL</li>
+        <li>Spring Boot</li>
+        <li>Hibernate</li>
+        <li>React and Angular</li>
+        <li>Manual Testing</li>
+        <li>Data Structures</li>
+    </ul>
+</div>
+</section>
+<br>
+<a class="resume" href="resume.pdf" ><b>Click here to download resume.</b></a>
+<style>
+	*{
+    padding: 0;
+    margin: 0;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+
+}
+
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+body{
+    background:burlywood;
+    overflow: hidden;
+    padding-left: 35rem;
+}
+
+.heading{
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    color: blue;
+    margin: 0 6rem;
+    font-size: 4rem;
+    padding-top: 6rem;
+    border-bottom: .1rem solid #fff4;
+    
+}
+
+.heading span{
+    color:blue;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.title{
+    text-align: center;
+    margin: 0 6rem;
+    font-size: 4rem;
+    padding-top: 6rem;
+    border-bottom: .1rem solid #fff4;
+    color: red;
+}
+
+.title span{
+    color: blue;
+}
+
+.head{
+    text-align: center;
+    margin: 0 6rem;
+    font-size: 4rem;
+    padding-top: 5rem;
+    border-bottom: .1rem solid #fff4;
+    color: #fff;
+}
+.head span{
+    color: blue;
+    font-family: 'Times New Roman', Times, serif;
+}
+.pro{
+    text-align: center;
+    margin: 0 6rem;
+    font-size: 4rem;
+    padding-top: 5rem;
+    border-bottom: .1rem solid #fff4;
+    color: #fff;
+}
+.pro span{
+    color: red;
+}
+header{
+    position:fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: 100%;
+    width: 35rem;
+    background:#043c46;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    text-align: center;
+}
+#cbcss{
+    font-size:2.15rem;
+    color: darkcyan;
+  margin-left: 60px;
+  margin-right: 60px;
+}
+header .user img{
+    height: 18rem;
+    width: 17rem;
+    border-radius: 50%;
+    object-fit:cover;
+    border: .5rem solid;
+}
+
+header .user .nm{
+    font-size:2.75rem;
+    color: red;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header .user .jb{
+    font-size:1.75rem;
+    color: #fff;
+}
+
+header .nv{
+    width: 100%;
+}
+header .nv ul{
+    list-style: none;
+    padding: 1rem ;
+}
+
+header .nv ul li a{
+    display: block;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    background:burlywood;
+    color: #fff;
+    font-size: 2.5rem;
+    border-radius: 5rem;
+    text-decoration: none;  
+}
+header .nv ul li a:hover{
+    background-color:green;
+    border-color: whitesmoke;
+    border-width: 3px;
+    border-style: solid;
+    color: orange;
+  font-weight: bold;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.Details .Row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 3rem 0;
+}
+
+.Details .Row .det{
+    flex: 1 1 48rem;
+    padding: 2rem 1rem;
+    padding-left: 8rem;
+}
+
+.Details .Row .det h3{
+    font-size: 2rem;
+    color: darkmagenta;
+    padding: 1rem 0;
+    font-weight: normal;
+}
+
+.Details .Row .det h3 span{
+    color: #043c46;
+    padding: 0. 5rem;
+}
+table,th,td{
+    align-content: center;
+    border: 2px solid #043c46;
+    border-collapse: collapse;
+}
+td{
+    color:darkcyan;
+    padding: 1rem;
+}
+th{
+    color: olivedrab;
+    padding: 1rem;
+}
+table{
+    text-align: center;
+    margin: 0 6rem;
+    font-size: 2rem;
+    padding: 1rem;
+    border-bottom: .1rem solid #fff4;
+    color: #fff;
+}
+#lis li{
+    margin: 0 9rem;
+    color: darkcyan;
+    font-size: 2rem;
+    padding: .5rem 1rem;
+}
+.Project .Row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 3rem 0;
+}
+
+.Project .Row .det{
+    flex: 1 1 48rem;
+    padding: 2rem 1rem;
+    padding-left: 8rem;
+}
+
+.Project .Row .det h3{
+    font-size: 2rem;
+    color: purple;
+    padding: 1rem 0;
+    font-weight: normal;
+}
+
+.Project .Row .det h3 span{
+    color: darkcyan;
+    padding: 0. 5rem;
+}
+
+.resume{
+    display: flex;
+    text-align : center;
+    font-size: 2rem;
+}
+</style>
+</body>
+</html>

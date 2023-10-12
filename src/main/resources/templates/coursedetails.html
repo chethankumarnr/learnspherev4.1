@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<style>
+		.container {
+			margin-top: 20px;
+			text-align: center;
+		}
+		.video-container {
+			margin-top: 10px;
+		}
+		.dropdown-video {
+			width: 560px;
+			background-color: #f2f2f2;
+			margin: 10px auto;
+		}
+		.dropdown-video .video-title {
+			color: #333;
+			font-size: 18px;
+			padding: 10px;
+			background-color: #e9ecef;
+			cursor: pointer;
+		}
+		.dropdown-video .video-frame {
+			display: none;
+			padding: 10px;
+			width:500px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1 th:text="${course.coursename}" style="color: #333;"></h1>
+		<h2 th:text="${course.price}" style="color: #555;"></h2>
+		<div th:each="lsn:${lessons}">
+			<div class="dropdown-video">
+				<div class="video-title" onclick="toggleVideo(this)">
+					<h3 th:text="${lsn.topics}" style="color: #666;"></h3>
+				</div>
+				<div class="video-frame">
+					<iframe width="540" height="315" th:src="${lsn.link}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+				</div>
+			</div>
+		</div>
+		<button class="btn btn-primary">BUY</button>
+	</div>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script>
+		function toggleVideo(element) {
+			const videoFrame = element.nextElementSibling;
+			videoFrame.style.display = videoFrame.style.display === "none" ? "block" : "none";
+		}
+	</script>
+</body>
+</html>
