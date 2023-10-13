@@ -44,6 +44,7 @@ public List<Course> getCourses(User user)
 }
 
 public Course getCourseById(int courseid) {
+	System.out.println(courseid +"_________________________________________________");
 	return cr.findById(courseid).get();
 	
 }

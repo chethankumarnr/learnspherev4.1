@@ -34,6 +34,11 @@ public class StudentController {
 		
 	}
 	
+	@GetMapping(value="/mycourses")
+	public String myCourses() {
+		return "studentcourses";
+		
+	}
 	
 	@GetMapping(value="/offer")
 	public String buyoffer(Model model,Long id)

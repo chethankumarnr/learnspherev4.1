@@ -1,10 +1,12 @@
 package com.learnsphere.session;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.learnsphere.Entities.*;
 
 public class Session {
-	
-	static public User cuser;
+	@Autowired
+	 public User cuser;
 	
 	public Session (long id,String role, String fname,String lname)
 	{
@@ -24,16 +26,13 @@ public class Session {
 	}
 	
 	
-	public static boolean check()
+	public  boolean check()
 	{
-		if(cuser==null||cuser.id==null)
+		if(cuser==null)
 		return false;
 		return true;
 		
 	}
 
-	public static Long getId() {
-		// TODO Auto-generated method stub
-		return cuser.id;
-	}
+	
 }

@@ -9,7 +9,12 @@
     <div class="container">
         <h1 class="mt-4">Update Course</h1>
         <form id="f1" action="/update" method="POST">
-			<input type="hidden" name="_method" value="put" >
+			
+			
+			<div class="form-group">
+                <label for="Id">Id:</label>
+                <input  th:value="${course.id}" type="disabled" class="form-control" id="id"  name="id" placeholder="${course.id}" readonly required>
+            </div>
      
             <div class="form-group">
                 <label for="coursename">Name:</label>
