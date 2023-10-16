@@ -7,7 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.learnsphere.Entities.User;
+import com.learnsphere.Service.EmailService;
 import com.learnsphere.Service.ServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +21,8 @@ public class MainController {
 
     @Autowired
     ServiceImpl ss;
+    @Autowired
+	private EmailService emailService;
 
     @GetMapping(value ="/register")
     public String registerPage() {
@@ -30,17 +35,74 @@ public class MainController {
     }
 
     @PostMapping(value="/adduser")
-    public String adduser(@ModelAttribute User user, Model model) {
+    public String adduser(@ModelAttribute User user, Model model,HttpSession session) {
+    	
         if (ss.emailExists(user.getEmail())) {
             String s = "User with the same email already exists";
             model.addAttribute("msg", s);
             return "register";
         }
+        
         model.addAttribute("user", user);
-        ss.save(user);
-        return "welcome";
+
+        int min = 10000; 
+        int max = 99999; 
+
+        int otp = (int) (Math.random() * (max - min + 1)) + min;
+       session.setAttribute("otp", otp);
+       session.setAttribute("user",user);
+        emailService.sendEmail(user.getEmail(), "OTP from LearnSphere","Your One Time Password is "+otp);
+////        ss.save(user);
+        return "otp";
     }
 
+    @PostMapping(value = "/verifyotp")
+    public String verifyOtp(@RequestParam("otp") int enteredOtp, HttpSession session, Model model) {
+    	if (session.getAttribute("otp")==null){
+    		System.out.println("enterted Otp ="+enteredOtp);
+    		return "register";
+    	}
+        int storedOtp = (int) session.getAttribute("otp");
+        User user = (User) session.getAttribute("user");
+System.out.println("enterted Otp ="+enteredOtp+" "+storedOtp);
+        if (enteredOtp == storedOtp) {
+            ss.save(user); // User is allowed to register
+            model.addAttribute("user", user);
+            return "welcome"; // Redirect to the welcome page
+        } else {
+            String s = "Wrong OTP. Please try again.";
+            model.addAttribute("msg", s);
+            return "enterotp"; // Redirect back to the OTP entry page
+        }
+    }
+    
+    @GetMapping(value="/resetpassword")
+    public String resetPassword(Model model) {
+    	return "resetpassword";
+    }
+    
+    @PostMapping(value="/resetotp")
+    public String resetPassword(@RequestParam("email")String email,Model model,HttpSession session) {
+    	System.out.println(email);
+    	if (!ss.emailExists(email)) {
+            String s = "User with above Email does not exist..Enter Correct Email";
+            model.addAttribute("msg", s);
+            return "resetpassword";
+        }
+    	
+    	 int min = 10000; 
+         int max = 99999; 
+
+         int otp = (int) (Math.random() * (max - min + 1)) + min;
+        session.setAttribute("otp2", otp);
+        session.setAttribute("user",ss.findByEmail(email));
+        emailService.sendEmail(email, "OTP from LearnSphere to Reset your Password","Your One Time Password is "+otp);
+         model.addAttribute("email",email);
+    	return "resetotp";
+    }
+    
+    
+    
     @GetMapping(value="/login")
     public String loginPage(Model model, HttpServletRequest request) {
         // Retrieve the HttpSession object
@@ -62,12 +124,40 @@ public class MainController {
     public String about() {
         return "resume";
     }
+    
+    @PostMapping(value="/verifyotp2")
+    public String verify2(@RequestParam("otp")int eotp,HttpSession session, Model model) {
+    	int otp2 = (int) session.getAttribute("otp2");
+    
+    	if(otp2==eotp ) {
+    		session.setAttribute("flag","true");
+    	return "passwordupdate";
+    	}
+    	
+    	model.addAttribute("msg","WRONG OTP...!! ENTER CORRECT OTP");
+    	return "resetotp";
+    }
+    
+    @PostMapping(value="/updatepassword")
+    public String verify2(@Param("newpassword") String newPassword, @Param("confirmpassword") String confirmPassword, Model model, HttpSession session) {
+        // Retrieve the HttpSession object
+    	if(session.getAttribute("flag")==null) {
+    		return "resetpassword";
+    	}
 
+    	User u = (User) session.getAttribute("user");
+    	u.setPassword(confirmPassword);
+    	model.addAttribute("msg","Password Upadate Sucess Login with new Credentials");
+    	return "login";
+    	
+    }
+    
+    
+    
     @PostMapping(value="/verify")
     public String verify(@Param("email") String email, @Param("password") String password, Model model, HttpServletRequest request) {
         // Retrieve the HttpSession object
         HttpSession session = request.getSession();
-
         if (session.getAttribute("user") != null) {
             User username = (User) session.getAttribute("user");
             model.addAttribute("username", username.toString());
@@ -76,9 +166,6 @@ public class MainController {
             }
             return "trainer";
         }
-     
-        
-
         if (ss.emailExists(email)) {
             User usr = ss.getByEmail(email);
             if (password.equals(usr.getPassword())) {
@@ -124,4 +211,12 @@ public class MainController {
         session.invalidate();
         return "login";
     }
+    
+    @GetMapping(value="/sendmail")
+    public String sendMail()
+    {
+    	emailService.sendEmail("chethanchethancng@gmail.com", "Subject", "email-template");
+		return "Sent";
+    }
+    
 }

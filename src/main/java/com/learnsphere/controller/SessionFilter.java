@@ -30,8 +30,14 @@ public class SessionFilter implements Filter {
         if (session == null || session.getAttribute("user") == null) {
             // Redirect unauthenticated users to the login page
             if (!httpRequest.getRequestURI().endsWith("/login") &&
-                !httpRequest.getRequestURI().endsWith("/register")&&!httpRequest.getRequestURI().endsWith("/")&&
-                !httpRequest.getRequestURI().endsWith("/register")&& !httpRequest.getRequestURI().endsWith("/verify")) {
+                !httpRequest.getRequestURI().endsWith("/register")
+                && !httpRequest.getRequestURI().endsWith("/resetpassword")
+                && !httpRequest.getRequestURI().endsWith("/resetotp")
+                && !httpRequest.getRequestURI().endsWith("/resetotp")
+                && !httpRequest.getRequestURI().endsWith("/resetotp2")
+                && !httpRequest.getRequestURI().endsWith("/updatepassword")
+                &&!httpRequest.getRequestURI().endsWith("/")&&
+                !httpRequest.getRequestURI().endsWith("/aboutme")&& !httpRequest.getRequestURI().endsWith("/adduser")&& !httpRequest.getRequestURI().endsWith("/verify")&& !httpRequest.getRequestURI().endsWith("/sendmail")&& !httpRequest.getRequestURI().endsWith("/verifyotp")) {
                 // You can adjust the URL pattern to exclude other paths that don't require authentication
                 httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
                 return;
